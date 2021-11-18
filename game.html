@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" onclick="jump()">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        *{
+    margin: 0;
+    padding: 0;
+}
+body{
+    background-color: blue;
+}
+h1{
+    text-align: center;
+    font-size: 44px;
+    margin-top: 1rem;
+    color:lightgreen;
+}
+#game{
+    border: 1px solid red;
+    width: 1200px;
+    height: 500px;
+    margin: 8rem;
+    margin-top: 3rem;
+    background-color:brown;
+    border-radius: 10px;
+}
+#character{
+    background-color: aqua;
+    width: 20px;
+    height: 80px;
+    position: relative;
+    top: 420px;
+    
+}
+.animate{
+    animation: jump 500ms ;
+}
+#block{
+    width: 20px;
+    height: 20px;
+    background-color:hotpink;
+    position: relative;
+    top:400px ;
+    left: 1180px;
+    animation: block 500ms linear infinite;
+}
+@keyframes jump{
+    0%{top: 400px;}
+    50%{top: 360px;}
+    100%{top: 420px;}
+}
+@keyframes block{
+    0%{left: 1180px;}
+    100%{left: -40px;}
+}
+    </style>
+    <title>game</title>
+</head>
+<body>
+    <h1>HIT AND OUT GAME</h1>
+    <div id="game">
+        <div id="character"></div>
+        <div id="block"></div>
+    </div>
+    <script >
+        var character = document.getElementById("character");
+var block = document.getElementById("block");
+
+function jump(){
+    character.classList.add("animate");
+    setTimeout(function(){
+        character.classList.remove("animate");
+    },500);
+}
+var checkDead = setInterval(function(){
+    var charactertop = parseInt(window.getComputedStyle(character).getPropertyValue("top"));
+    var blockleft = parseInt(window.getComputedStyle(block).getPropertyValue("left"));
+    if(blockleft<20 && blockleft>0 && charactertop>=400){
+        block.style.animation="none";
+        block.style.display="none";
+      alert("u loose");
+    }
+},10);
+    </script>
+</body>
+</html>
